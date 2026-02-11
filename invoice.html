@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizon OOH Invoice</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="invoice-body">
+
+    <div class="page invoice-page">
+        <!-- Header Reused -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo-container">
+                    <img src="logo.png" alt="Horizon OOH Logo" class="logo-image">
+                    <div class="brand-text">
+                        <h1>HORIZON OOH</h1>
+                        <p>Your Vision Zone</p>
+                    </div>
+                </div>
+
+                <div class="contact-info">
+                    <div class="contact-item"><i class="fa-solid fa-phone"></i><span>+1 234 567 8900</span></div>
+                    <div class="contact-item"><i class="fa-solid fa-envelope"></i><span>info@horizonooh.com</span></div>
+                    <div class="contact-item"><i class="fa-solid fa-globe"></i><span>www.horizon-ooh.com</span></div>
+                </div>
+            </div>
+            <div class="gold-bar"></div>
+        </header>
+
+        <main class="content invoice-content">
+            <div class="invoice-title-row">
+                <h2 class="document-title">INVOICE</h2>
+                <div class="invoice-details">
+                    <p><strong>Invoice No:</strong> #INV-2024-001</p>
+                    <p><strong>Date:</strong> May 15, 2024</p>
+                </div>
+            </div>
+
+            <div class="bill-to-section">
+                <h3>Bill To:</h3>
+                <p><strong>Client Name</strong></p>
+                <p>Client Company</p>
+                <p>123 Client Address, City</p>
+            </div>
+
+            <table class="invoice-table">
+                <thead>
+                    <tr>
+                        <th class="col-desc">Description</th>
+                        <th class="col-qty">Quantity</th>
+                        <th class="col-rate">Unit Price</th>
+                        <th class="col-total">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Billboard Advertising - Site A - 1 Month</td>
+                        <td>1</td>
+                        <td>$5,000.00</td>
+                        <td>$5,000.00</td>
+                    </tr>
+                    <tr>
+                        <td>Production & Installation</td>
+                        <td>1</td>
+                        <td>$1,200.00</td>
+                        <td>$1,200.00</td>
+                    </tr>
+                    <tr>
+                        <td>Design Consultation</td>
+                        <td>5</td>
+                        <td>$100.00</td>
+                        <td>$500.00</td>
+                    </tr>
+                    <!-- Empty rows for spacing -->
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="invoice-summary">
+                <div class="summary-row">
+                    <span>Subtotal:</span>
+                    <span>$6,700.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Tax (10%):</span>
+                    <span>$670.00</span>
+                </div>
+                <div class="summary-row total-row">
+                    <span>Total:</span>
+                    <span>$7,370.00</span>
+                </div>
+            </div>
+
+            <div class="payment-info">
+                <h3>Payment Methods:</h3>
+                <p>Bank Transfer: Bank Name, Account No: 123456789</p>
+                <p>Checks payable to: Horizon OOH</p>
+            </div>
+
+            <div class="auth-sign">
+                <div class="signature-line"></div>
+                <p>Authorized Signature</p>
+            </div>
+        </main>
+
+        <!-- Footer Reused -->
+        <footer class="footer">
+            <div class="gold-bar"></div>
+            <div class="footer-content">
+                <h2 class="footer-tagline">Your Vision Zone</h2>
+                <div class="footer-details">
+                    <div class="detail-item"><i class="fa-solid fa-location-dot"></i><span>123 Any Street, Suite 100,
+                            Your City, ST 2345</span></div>
+                    <div class="detail-item"><i class="fa-solid fa-phone"></i><span>+ 1 234 567 8900</span></div>
+                    <div class="detail-item"><i class="fa-solid fa-envelope"></i><span>www.horizon-ooh.com</span></div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+</body>
+
+</html>

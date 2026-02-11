@@ -1,0 +1,855 @@
+:root {
+    --navy-blue: #1c2237;
+    /* Dark navy from image */
+    --gold: #ffa800;
+    /* Vibrant gold/orange */
+    --gold-dark: #e69500;
+    --text-grey: #444;
+    --text-light-grey: #666;
+    --white: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #f0f0f0;
+    /* Light grey backdrop for viewing */
+    font-family: 'Open Sans', sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.page {
+    background-color: var(--white);
+    width: 210mm;
+    height: 297mm;
+    /* A4 size */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    /* Ensure header/footer bleed stays contained */
+}
+
+/* Header Styles */
+.header {
+    background-color: var(--navy-blue);
+    color: var(--white);
+    padding-top: 35px;
+    position: relative;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    /* Align into top corners */
+    padding: 0 45px 25px 45px;
+}
+
+/* Logo Section */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-image {
+    max-height: 55px;
+    width: auto;
+    object-fit: contain;
+}
+
+
+.brand-text h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 26px;
+    margin-bottom: 0;
+    line-height: 1;
+    letter-spacing: 0.5px;
+    color: #e0e0e0;
+    /* Slightly off-white */
+}
+
+.brand-text h1 span {
+    color: var(--white);
+}
+
+.brand-text p {
+    font-family: 'Dancing Script', cursive;
+    /* Using script font for 'Your Vision Zone' if desired, or italic sans */
+    font-family: 'Montserrat', sans-serif;
+    /* Actually image looks like italic sans-serif */
+    font-style: italic;
+    font-weight: 500;
+    color: var(--gold);
+    font-size: 14px;
+    margin-top: 2px;
+}
+
+/* Contact Info Header */
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    /* Right align */
+    gap: 6px;
+    font-size: 11px;
+    color: var(--gold);
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.contact-item i {
+    color: var(--gold);
+    font-size: 14px;
+    width: 14px;
+    /* Fixed width for alignment */
+    text-align: center;
+}
+
+.contact-item span {
+    color: #ccc;
+    font-weight: 400;
+}
+
+.header .gold-bar {
+    height: 6px;
+    background-color: var(--gold);
+    width: 100%;
+}
+
+/* Body Content */
+.content {
+    padding: 50px 65px;
+    flex-grow: 1;
+    color: var(--text-grey);
+}
+
+.meta-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.recipient strong {
+    color: #000;
+    font-size: 14px;
+}
+
+.date {
+    font-weight: 600;
+    color: #000;
+}
+
+.letter-body {
+    font-size: 13px;
+    line-height: 1.8;
+    color: #555;
+    text-align: justify;
+}
+
+.salutation {
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 20px;
+}
+
+.letter-body p {
+    margin-bottom: 20px;
+}
+
+/* Signature */
+.signature-block {
+    margin-top: 40px;
+}
+
+.signature {
+    font-family: 'Dancing Script', cursive;
+    font-size: 32px;
+    color: #000;
+    margin-bottom: 5px;
+}
+
+.signer-name {
+    font-weight: 700;
+    color: #000;
+    font-size: 14px;
+}
+
+.signer-title {
+    font-size: 13px;
+    color: #555;
+}
+
+/* Footer Styles */
+.footer {
+    background-color: var(--navy-blue);
+    color: var(--white);
+    margin-top: auto;
+    /* Push to bottom */
+}
+
+.footer .gold-bar {
+    height: 6px;
+    background-color: var(--gold);
+    width: 100%;
+}
+
+.footer-content {
+    padding: 20px 40px 30px 40px;
+    text-align: center;
+}
+
+.footer-tagline {
+    font-family: 'Times New Roman', serif;
+    /* Serif font for bottom tagline? Or matches logo? */
+    font-family: 'Montserrat', sans-serif;
+    font-style: italic;
+    font-weight: 700;
+    color: var(--gold);
+    font-size: 18px;
+    display: block;
+    width: 90%;
+    margin: 0 auto 15px auto;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 10px;
+}
+
+.footer-details {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    font-size: 10px;
+    color: #ccc;
+    flex-wrap: wrap;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.detail-item i {
+    color: var(--gold);
+}
+
+/* Print Overrides */
+@media print {
+    body {
+        margin: 0;
+        padding: 0;
+        background: none;
+    }
+
+    .page {
+        box-shadow: none;
+        width: 100%;
+        height: auto;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
+
+/* Business Card Styles */
+.card-body {
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
+.card-container {
+    padding: 20px;
+}
+
+.business-card {
+    width: 3.5in;
+    height: 2in;
+    background-color: var(--navy-blue);
+    color: var(--white);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Modern Card Styles */
+.modern-card {
+    background: radial-gradient(circle at top right, #232a42, var(--navy-blue));
+    position: relative;
+    z-index: 1;
+}
+
+.card-bg-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.1;
+    background-image: radial-gradient(var(--gold) 1px, transparent 1px);
+    background-size: 10px 10px;
+    z-index: -1;
+}
+
+.card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    flex-grow: 1;
+    gap: 10px;
+}
+
+.qr-container {
+    background-color: var(--white);
+    padding: 4px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.qr-code {
+    width: 45px;
+    height: 45px;
+}
+
+/* Adjustments for layout with QR */
+.card-left {
+    flex: 1;
+}
+
+.card-center {
+    flex: 0 0 auto;
+    margin: 0 15px;
+}
+
+.card-right {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.card-logo img {
+    max-height: 40px;
+}
+
+.card-logo .brand-text h1 {
+    font-size: 18px;
+}
+
+.card-logo .brand-text p {
+    font-size: 9px;
+    border-bottom: 1px solid var(--gold);
+    /* Mini version of footer style */
+    display: inline-block;
+}
+
+.person-info {
+    text-align: right;
+}
+
+.person-name {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--white);
+    text-transform: uppercase;
+}
+
+.person-title {
+    color: var(--gold);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.card-footer {
+    width: 100%;
+}
+
+.card-contact {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 25px 10px 25px;
+    font-size: 7px;
+    color: #ccc;
+}
+
+.c-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.c-item i {
+    color: var(--gold);
+    font-size: 8px;
+}
+
+@media print {
+    .card-body {
+        height: auto;
+        display: block;
+        background: none;
+    }
+
+    .card-container {
+        padding: 0;
+    }
+
+    .business-card {
+        box-shadow: none;
+        page-break-inside: avoid;
+        margin: 10px;
+        border: 1px solid #ddd;
+        /* Light border for cutting guide if needed */
+    }
+}
+
+/* Envelope Styles */
+.envelope-body {
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.envelope-container {
+    padding: 20px;
+}
+
+.envelope {
+    width: 220mm;
+    height: 110mm;
+    background-color: var(--white);
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.env-left-bar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 15px;
+    background-color: var(--navy-blue);
+    border-right: 5px solid var(--gold);
+}
+
+.env-content {
+    padding: 25px 30px 25px 50px;
+    /* Left padding accommodates the bar */
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.env-brand-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.env-logo .logo-image {
+    max-height: 45px;
+}
+
+.env-logo .brand-text h1 {
+    font-size: 20px;
+    color: var(--navy-blue);
+}
+
+.env-logo .brand-text h1 span {
+    color: var(--navy-blue);
+    /* Ensure consistency if span used */
+}
+
+.env-return-address {
+    font-size: 9px;
+    color: #555;
+    line-height: 1.5;
+}
+
+.env-return-address i {
+    color: var(--gold);
+    margin-right: 5px;
+    width: 10px;
+}
+
+.env-recipient-area {
+    width: 45%;
+    margin-right: 20px;
+}
+
+.to-label {
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.recipient-lines .line {
+    height: 1px;
+    background-color: #ddd;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.env-bottom-bar {
+    height: 5px;
+    background-color: var(--navy-blue);
+    width: 100%;
+}
+
+@media print {
+    .envelope-body {
+        height: auto;
+        display: block;
+        background: none;
+    }
+
+    .envelope {
+        box-shadow: none;
+        margin: 0;
+        page-break-after: always;
+    }
+}
+
+/* ID Card Styles */
+.id-card-body {
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.id-card-container {
+    padding: 20px;
+}
+
+.id-card {
+    width: 2.125in;
+    height: 3.375in;
+    /* Standard CR80 size */
+    background-color: var(--navy-blue);
+    color: var(--white);
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.id-header {
+    width: 100%;
+    padding: 20px 0 10px 0;
+    text-align: center;
+    background: radial-gradient(circle at top, #2b3352, var(--navy-blue));
+}
+
+.id-logo-img {
+    height: 35px;
+    width: auto;
+}
+
+.id-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+
+/* Pattern overlay for ID */
+.id-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(var(--gold) 1px, transparent 1px);
+    background-size: 15px 15px;
+    opacity: 0.05;
+    z-index: 0;
+}
+
+.photo-frame {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid var(--gold);
+    overflow: hidden;
+    margin-top: 10px;
+    background-color: #ddd;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.photo-placeholder i {
+    font-size: 50px;
+    color: #999;
+}
+
+.employee-details {
+    text-align: center;
+    margin-top: 15px;
+    z-index: 1;
+}
+
+.emp-name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+}
+
+.emp-title {
+    color: var(--gold);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.emp-divider {
+    width: 30px;
+    height: 2px;
+    background-color: var(--gold);
+    margin: 8px auto;
+}
+
+.emp-id {
+    font-size: 10px;
+    color: #ccc;
+}
+
+.id-qr-section {
+    margin-top: auto;
+    margin-bottom: 20px;
+    padding: 5px;
+    background-color: white;
+    border-radius: 5px;
+    z-index: 1;
+}
+
+.id-qr-code {
+    width: 60px;
+    height: 60px;
+    display: block;
+}
+
+.id-footer {
+    width: 100%;
+    background-color: #151b2d;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.id-footer p {
+    font-size: 8px;
+    color: var(--gold);
+    margin-top: 5px;
+}
+
+@media print {
+    .id-card-body {
+        height: auto;
+        display: block;
+        background: none;
+    }
+
+    .id-card {
+        box-shadow: none;
+        page-break-inside: avoid;
+        margin: 10px;
+        border: 1px solid #ddd;
+        border-radius: 0;
+        /* Printers may cut rounded corners */
+    }
+}
+
+/* Invoice Styles */
+.invoice-body {
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.invoice-page {
+    /* Inherits .page styles (A4) */
+    display: flex;
+    flex-direction: column;
+}
+
+.invoice-content {
+    padding: 30px 50px;
+}
+
+.invoice-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+.document-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--navy-blue);
+    margin: 0;
+}
+
+.invoice-details p {
+    font-size: 13px;
+    color: #555;
+    text-align: right;
+    margin: 2px 0;
+}
+
+.bill-to-section {
+    margin-bottom: 30px;
+    font-size: 13px;
+}
+
+.bill-to-section h3 {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--navy-blue);
+    font-size: 14px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    border-bottom: 1px solid var(--gold);
+    display: inline-block;
+    padding-bottom: 2px;
+}
+
+.invoice-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+    font-size: 13px;
+}
+
+.invoice-table th,
+.invoice-table td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.invoice-table th {
+    background-color: var(--navy-blue);
+    color: var(--white);
+    text-transform: uppercase;
+    font-size: 11px;
+    font-family: 'Montserrat', sans-serif;
+    text-align: left;
+}
+
+.col-qty,
+.col-rate,
+.col-total {
+    text-align: right;
+}
+
+.invoice-table th.col-qty,
+.invoice-table th.col-rate,
+.invoice-table th.col-total {
+    text-align: right;
+}
+
+.invoice-summary {
+    width: 40%;
+    margin-left: auto;
+    font-size: 13px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.total-row {
+    border-bottom: none;
+    background-color: var(--navy-blue);
+    color: var(--white);
+    padding: 10px;
+    font-weight: 700;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
+.payment-info {
+    margin-top: 40px;
+    font-size: 12px;
+    color: #666;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+}
+
+.payment-info h3 {
+    font-size: 13px;
+    color: var(--navy-blue);
+    margin-bottom: 5px;
+}
+
+.auth-sign {
+    margin-top: 50px;
+    width: 200px;
+    text-align: center;
+}
+
+.signature-line {
+    border-bottom: 1px solid #000;
+    margin-bottom: 5px;
+}
+
+.auth-sign p {
+    font-size: 11px;
+    font-weight: 600;
+}
