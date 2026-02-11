@@ -41,7 +41,7 @@
                     </div>
                     <div class="contact-item">
                         <i class="fa-solid fa-globe"></i>
-                        <span>www.horizonooh.com</span>
+                        <span>www.horizon-ooh.com</span>
                     </div>
                 </div>
             </div>
@@ -103,13 +103,42 @@
                     </div>
                     <div class="detail-item">
                         <i class="fa-solid fa-envelope"></i> <!-- Using envelope as generic web/contact icon match -->
-                        <span>website: www.horizonooh.com</span>
+                        <span>website: www.horizon-ooh.com</span>
                     </div>
                 </div>
             </div>
         </footer>
     </div>
 
+    <!-- Controls -->
+    <div class="controls">
+        <button id="download-btn" class="btn-download">
+            <i class="fa-solid fa-file-pdf"></i> Download PDF
+        </button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+        document.getElementById('download-btn').addEventListener('click', function () {
+            const element = document.querySelector('.page');
+            // Slight height reduction in capture to preventing overflow
+            const opt = {
+                margin: 0,
+                filename: 'Horizon_OOH_Letterhead.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: {
+                    scale: 2,
+                    useCORS: true,
+                    scrollY: 0,
+                    height: element.offsetHeight,
+                },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(element).save();
+        });
+    </script>
 </body>
 
 </html>
