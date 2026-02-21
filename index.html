@@ -23,11 +23,7 @@
         <header class="header">
             <div class="header-content">
                 <div class="logo-container">
-                    <img src="logo.png" alt="Horizon OOH Logo" class="logo-image">
-                    <div class="brand-text">
-                        <h1>HORIZON OOH</h1>
-                        <p>Your Vision Zone</p>
-                    </div>
+                    <img src="logo-1.png" alt="Horizon OOH Logo" class="logo-image">
                 </div>
 
                 <div class="contact-info">
@@ -122,6 +118,16 @@
     <script>
         document.getElementById('download-btn').addEventListener('click', function () {
             const element = document.querySelector('.page');
+
+            // Temporarily remove box-shadow to prevent whitespace on borders in PDF
+            const originalBoxShadow = element.style.boxShadow;
+            element.style.boxShadow = 'none';
+
+            // Temporarily remove flex and padding from body to fix left offset bug in html2canvas
+            const originalBodyCssText = document.body.style.cssText;
+            document.body.style.cssText = 'display: block; padding: 0; margin: 0; background: #fff;';
+            element.style.margin = '0';
+
             // Slight height reduction in capture to preventing overflow
             const opt = {
                 margin: 0,
@@ -131,12 +137,17 @@
                     scale: 2,
                     useCORS: true,
                     scrollY: 0,
+                    scrollX: 0,
                     height: element.offsetHeight,
                 },
                 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
 
-            html2pdf().set(opt).from(element).save();
+            html2pdf().set(opt).from(element).save().then(() => {
+                element.style.boxShadow = originalBoxShadow; // Restore box-shadow after generating PDF
+                document.body.style.cssText = originalBodyCssText; // Restore body layout
+                element.style.margin = '';
+            });
         });
     </script>
 </body>
