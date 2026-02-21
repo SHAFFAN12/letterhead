@@ -1,9 +1,8 @@
 :root {
     --navy-blue: #1c2237;
     /* Dark navy from image */
-    --gold: #ffa800;
-    /* Vibrant gold/orange */
-    --gold-dark: #e69500;
+    /* --gold: #ffa800; */
+    --gold: #d6ac11;
     --text-grey: #444;
     --text-light-grey: #666;
     --white: #ffffff;
@@ -42,7 +41,7 @@ body {
 .header {
     background-color: var(--navy-blue);
     color: var(--white);
-    padding-top: 35px;
+    padding-top: 15px;
     position: relative;
 }
 
@@ -62,7 +61,7 @@ body {
 }
 
 .logo-image {
-    max-height: 55px;
+    max-height: 80px;
     width: auto;
     object-fit: contain;
 }
