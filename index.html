@@ -23,7 +23,7 @@
         <header class="header">
             <div class="header-content">
                 <div class="logo-container">
-                    <img src="logo-1.png" alt="Horizon OOH Logo" class="logo-image">
+                    <img src="new_logo.png" alt="Horizon OOH Logo" class="logo-image">
                 </div>
 
                 <div class="contact-info">
@@ -35,10 +35,6 @@
                         <i class="fa-solid fa-envelope"></i>
                         <span>oohhorizon@gmail.com</span>
                     </div>
-                    <div class="contact-item">
-                        <i class="fa-solid fa-globe"></i>
-                        <span>www.horizon-ooh.com</span>
-                    </div>
                 </div>
             </div>
             <div class="gold-bar"></div>
@@ -46,6 +42,7 @@
 
         <!-- Body Content -->
         <main class="content">
+            <img src="new_logo.png" class="watermark-img" alt="watermark">
             <!-- <div class="meta-row">
                 <div class="recipient">
                     <strong>Michael Johnson</strong><br>
@@ -94,12 +91,8 @@
                         <span>R-741 Block:03 Saadi Garden Malir Cantt</span>
                     </div>
                     <div class="detail-item">
-                        <i class="fa-solid fa-phone"></i>
-                        <span>+92 3091329000</span>
-                    </div>
-                    <div class="detail-item">
-                        <i class="fa-solid fa-envelope"></i> <!-- Using envelope as generic web/contact icon match -->
-                        <span>website: www.horizon-ooh.com</span>
+                        <i class="fa-solid fa-globe"></i>
+                        <span>www.horizon-ooh.com</span>
                     </div>
                 </div>
             </div>
@@ -125,20 +118,36 @@
 
             // Temporarily remove flex and padding from body to fix left offset bug in html2canvas
             const originalBodyCssText = document.body.style.cssText;
-            document.body.style.cssText = 'display: block; padding: 0; margin: 0; background: #fff;';
-            element.style.margin = '0';
+            const originalHtmlCssText = document.documentElement.style.cssText;
 
-            // Slight height reduction in capture to preventing overflow
+            // Aggressive layout reset for capture
+            document.documentElement.style.cssText = 'margin: 0; padding: 0; overflow: visible;';
+            document.body.style.cssText = 'display: block; padding: 0; margin: 0; background: #fff; overflow: visible;';
+
+            const originalElementMargin = element.style.margin;
+            element.style.margin = '0 auto'; // Center it locally but at the top
+
+            // Explicitly scroll to top to avoid offset issues
+            window.scrollTo(0, 0);
+
+            // Precise capture options
             const opt = {
                 margin: 0,
                 filename: 'Horizon_OOH_Letterhead.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
+                image: { type: 'jpeg', quality: 1.0 },
                 html2canvas: {
-                    scale: 2,
+                    scale: 3, // High scale for precision
                     useCORS: true,
-                    scrollY: 0,
+                    logging: false,
+                    letterRendering: true,
                     scrollX: 0,
+                    scrollY: 0,
+                    windowWidth: document.documentElement.offsetWidth,
+                    windowHeight: document.documentElement.offsetHeight,
+                    width: element.offsetWidth,
                     height: element.offsetHeight,
+                    x: element.getBoundingClientRect().left + window.scrollX,
+                    y: element.getBoundingClientRect().top + window.scrollY
                 },
                 jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
@@ -146,7 +155,8 @@
             html2pdf().set(opt).from(element).save().then(() => {
                 element.style.boxShadow = originalBoxShadow; // Restore box-shadow after generating PDF
                 document.body.style.cssText = originalBodyCssText; // Restore body layout
-                element.style.margin = '';
+                document.documentElement.style.cssText = originalHtmlCssText;
+                element.style.margin = originalElementMargin;
             });
         });
     </script>
