@@ -4,55 +4,440 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Horizon OOH Visiting Card</title>
-    <!-- Fonts -->
+    <title>Horizon OOH – Visiting Card</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap"
         rel="stylesheet">
-    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --navy: #1c2237;
+            --navy-dark: #131826;
+            --gold: #FF8C00;
+            --gold-light: #FFA500;
+            /* Matched to letterhead vibrant gold */
+            --white: #ffffff;
+            /* Standard business card: 3.5in × 2in = 336px × 192px at 96dpi */
+            --card-w: 336px;
+            --card-h: 192px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1f36 0%, #2d3561 100%);
+            font-family: 'Open Sans', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            gap: 28px;
+            padding: 2rem;
+        }
+
+        .preview-label {
+            color: rgba(255, 255, 255, 0.45);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .cards-wrapper {
+            display: flex;
+            gap: 32px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .card-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-side-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 9px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.3);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* ══════════════════════════
+           BUSINESS CARD BASE
+        ══════════════════════════ */
+        .business-card {
+            width: var(--card-w);
+            height: var(--card-h);
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 55px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(214, 172, 17, 0.2);
+        }
+
+        /* ══════════════════════════
+           FRONT SIDE
+        ══════════════════════════ */
+        .card-front {
+            background: linear-gradient(135deg, #0f1425 0%, var(--navy) 50%, #253050 100%);
+        }
+
+
+        /* Corner accent */
+        .card-corner-accent {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 90px;
+            height: 90px;
+            background: conic-gradient(from 225deg, rgba(214, 172, 17, 0.12), transparent 60%);
+            pointer-events: none;
+        }
+
+        .card-top-bar {
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+            flex-shrink: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-body {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 15px;
+            /* Slightly reduced from 20px to fit larger logo */
+            position: relative;
+            z-index: 1;
+            gap: 10px;
+        }
+
+        .card-brand img {
+            height: 65px;
+            /* Increased from 40px */
+            width: auto;
+            object-fit: contain;
+            display: block;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+            /* Added pop effect */
+        }
+
+        .card-divider-v {
+            width: 1px;
+            height: 58px;
+            background: linear-gradient(to bottom, transparent, rgba(214, 172, 17, 0.5), transparent);
+            flex-shrink: 0;
+        }
+
+        .card-person {
+            text-align: right;
+        }
+
+        .card-person .name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 13.5px;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: 0.3px;
+            line-height: 1.2;
+        }
+
+        .card-person .role {
+            font-size: 8.5px;
+            font-weight: 600;
+            color: var(--gold);
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
+        .card-footer-strip {
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-contacts {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 18px 4px;
+            font-size: 6.5px;
+            color: rgba(255, 255, 255, 0.55);
+            gap: 4px;
+        }
+
+        .card-contacts .ci {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            white-space: nowrap;
+        }
+
+        .card-contacts .ci i {
+            color: var(--gold);
+            font-size: 7px;
+        }
+
+        .card-bottom-bar {
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+        }
+
+        /* ══════════════════════════
+           BACK SIDE
+        ══════════════════════════ */
+        .card-back {
+            background: linear-gradient(145deg, var(--navy-dark) 0%, #1e2844 50%, var(--navy) 100%);
+        }
+
+        .card-back .card-body {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 16px;
+        }
+
+        /* Scan tagline */
+        .back-scan-tag {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 7px;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            color: rgba(255, 255, 255, 0.35);
+            text-transform: uppercase;
+        }
+
+        /* QR code frame */
+        .back-qr-wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .back-qr-frame {
+            background: var(--white);
+            padding: 6px;
+            border-radius: 6px;
+            border: 2px solid var(--gold);
+            box-shadow: 0 4px 18px rgba(214, 172, 17, 0.3);
+            display: flex;
+        }
+
+        .back-qr-frame img {
+            width: 68px;
+            height: 68px;
+            display: block;
+        }
+
+        /* Contact list on back */
+        .back-contacts {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            align-items: center;
+        }
+
+        .back-ci {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 7px;
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        .back-ci i {
+            color: var(--gold);
+            font-size: 7px;
+            width: 10px;
+            text-align: center;
+        }
+
+        /* ══════════════════════════
+           DOWNLOAD BUTTON
+        ══════════════════════════ */
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 13px 32px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: var(--navy-dark);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(214, 172, 17, 0.4);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 36px rgba(214, 172, 17, 0.55);
+        }
+
+        .btn-download:active {
+            transform: translateY(0);
+        }
+
+        .btn-download.loading {
+            opacity: 0.7;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+    </style>
 </head>
 
-<body class="card-body">
+<body>
 
-    <div class="card-container">
-        <!-- Front Side -->
-        <div class="business-card">
-            <div class="card-gold-bar top"></div>
+    <h2 class="preview-label">Business Card Preview — Front & Back</h2>
 
-            <div class="card-content">
-                <div class="card-left">
-                    <div class="logo-container card-logo">
-                        <img src="logo.png" alt="Horizon OOH" class="logo-image">
-                        <div class="brand-text">
-                            <h1>HORIZON OOH</h1>
-                            <p>Your Vision Zone</p>
+    <div class="cards-wrapper">
+        <!-- FRONT -->
+        <div class="card-column">
+            <span class="card-side-label">Front</span>
+            <div id="card-front" class="business-card card-front">
+                <div class="card-corner-accent"></div>
+                <div class="card-top-bar"></div>
+
+                <div class="card-body">
+                    <div class="card-brand">
+                        <img src="new_logo.png" alt="Horizon OOH">
+                    </div>
+                    <div class="card-divider-v"></div>
+                    <div class="card-person">
+                        <div class="name">Ghufran Muhammed</div>
+                        <div class="role">Chief Executive Officer</div>
+                    </div>
+                </div>
+
+                <div class="card-footer-strip">
+                    <div class="card-contacts">
+                        <div class="ci"><i class="fa-solid fa-phone"></i> +92 309 1329000</div>
+                        <div class="ci"><i class="fa-solid fa-envelope"></i> oohhorizon@gmail.com</div>
+                        <div class="ci"><i class="fa-solid fa-globe"></i> www.horizon-ooh.com</div>
+                    </div>
+                    <div class="card-bottom-bar"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BACK -->
+        <div class="card-column">
+            <span class="card-side-label">Back</span>
+            <div id="card-back" class="business-card card-back">
+                <div class="card-corner-accent"></div>
+                <div class="card-top-bar"></div>
+
+                <div class="card-body">
+                    <div class="back-scan-tag">Scan to Connect</div>
+
+                    <div class="back-qr-wrap">
+                        <div class="back-qr-frame">
+                            <!-- qrcode.js injects a canvas into this div -->
+                            <div id="qr-container"></div>
                         </div>
                     </div>
                 </div>
 
-                <div class="card-right">
-                    <div class="person-info">
-                        <h2 class="person-name">Ghufran Muhammed</h2>
-                        <p class="person-title">CEO</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card-footer">
-                <div class="card-contact">
-                    <div class="c-item"><i class="fa-solid fa-phone"></i> 03091329000</div>
-                    <div class="c-item"><i class="fa-solid fa-envelope"></i> info@horizonooh.com</div>
-                    <div class="c-item"><i class="fa-solid fa-globe"></i> www.horizonooh.com</div>
-                </div>
-                <div class="card-gold-bar bottom"></div>
+                <div class="card-bottom-bar"></div>
             </div>
         </div>
     </div>
 
+    <button id="download-btn" class="btn-download">
+        <i class="fa-solid fa-file-pdf"></i> Download PDF (Front + Back)
+    </button>
+
+    <!-- Load jsPDF and html2canvas independently for reliable 2-page PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- Local QR code generator (no external image requests = no CORS) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script>
+        // Generate QR code locally — qrcode.js needs a <div> container
+        const qrData = 'https://wa.me/923091329000';
+        new QRCode(document.getElementById('qr-container'), {
+            text: qrData,
+            width: 80,
+            height: 80,
+            colorDark: '#1c2237',
+            colorLight: '#ffffff',
+            correctLevel: QRCode.CorrectLevel.M
+        });
+
+        document.getElementById('download-btn').addEventListener('click', async function () {
+            const btn = this;
+            btn.classList.add('loading');
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Generating PDF\u2026';
+
+            const CARD_W_IN = 3.5;
+            const CARD_H_IN = 2;
+
+            const frontEl = document.getElementById('card-front');
+            const backEl = document.getElementById('card-back');
+
+            const makeOpts = (el) => ({
+                scale: 4,
+                useCORS: true,
+                allowTaint: false,
+                scrollY: -window.scrollY,
+                scrollX: -window.scrollX,
+                logging: false,
+                backgroundColor: null,
+                width: el.offsetWidth,
+                height: el.offsetHeight
+            });
+
+            try {
+                const frontCanvas = await html2canvas(frontEl, makeOpts(frontEl));
+                const backCanvas = await html2canvas(backEl, makeOpts(backEl));
+
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF({
+                    orientation: 'landscape',
+                    unit: 'in',
+                    format: [CARD_W_IN, CARD_H_IN],
+                    compress: true
+                });
+
+                pdf.addImage(frontCanvas.toDataURL('image/jpeg', 0.97),
+                    'JPEG', 0, 0, CARD_W_IN, CARD_H_IN);
+
+                pdf.addPage();
+                pdf.addImage(backCanvas.toDataURL('image/jpeg', 0.97),
+                    'JPEG', 0, 0, CARD_W_IN, CARD_H_IN);
+
+                pdf.save('Horizon_OOH_BusinessCard.pdf');
+            } catch (err) {
+                console.error('PDF generation failed:', err);
+                alert('PDF generation failed: ' + err.message);
+            } finally {
+                btn.classList.remove('loading');
+                btn.innerHTML = '<i class="fa-solid fa-file-pdf"></i> Download PDF (Front + Back)';
+            }
+        });
+    </script>
 </body>
 
 </html>
