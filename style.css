@@ -1,8 +1,8 @@
 :root {
-    --navy-blue: #1c2237;
+    --navy-blue: #001F4D;
     /* Dark navy from image */
     /* --gold: #ffa800; */
-    --gold: #d6ac11;
+    --gold: #FF8C00;
     --text-grey: #444;
     --text-light-grey: #666;
     --white: #ffffff;
@@ -41,8 +41,11 @@ body {
 .header {
     background-color: var(--navy-blue);
     color: var(--white);
-    padding-top: 15px;
+    padding-top: 10px;
+    /* Further reduced from 15px */
     position: relative;
+    border: none;
+    outline: none;
 }
 
 .header-content {
@@ -50,7 +53,8 @@ body {
     justify-content: space-between;
     align-items: flex-start;
     /* Align into top corners */
-    padding: 0 45px 25px 45px;
+    padding: 10px 45px 0 45px;
+    /* Further reduced from 15px */
 }
 
 /* Logo Section */
@@ -58,10 +62,14 @@ body {
     display: flex;
     align-items: center;
     gap: 15px;
+    margin-bottom: -15px;
+    /* Pushes logo onto the orange/gold border */
+    position: relative;
+    z-index: 10;
 }
 
 .logo-image {
-    max-height: 80px;
+    max-height: 130px;
     width: auto;
     object-fit: contain;
 }
@@ -100,9 +108,10 @@ body {
     flex-direction: column;
     align-items: flex-start;
     /* Right align */
-    gap: 6px;
+    gap: 15px;
     font-size: 13px;
     color: var(--gold);
+    margin-top: 15px;
 }
 
 .contact-item {
@@ -135,7 +144,24 @@ body {
     padding: 50px 65px;
     flex-grow: 1;
     color: var(--text-grey);
+    position: relative;
+    z-index: 1;
 }
+
+/* Watermark */
+.watermark-img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    /* Increased width for the billboard logo */
+    opacity: 0.08;
+    /* Slightly lowered opacity for a subtler effect */
+    pointer-events: none;
+    z-index: 0;
+}
+
 
 .meta-row {
     display: flex;
