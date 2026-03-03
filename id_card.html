@@ -4,54 +4,502 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Horizon OOH Employee ID</title>
-    <!-- Fonts -->
+    <title>Horizon OOH – Employee ID Card</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap"
         rel="stylesheet">
-    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --navy: #1c2237;
+            --navy-dark: #131826;
+            --gold: #FF8C00;
+            --gold-light: #FFA500;
+            --white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1f36 0%, #2d3561 100%);
+            font-family: 'Open Sans', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            gap: 28px;
+            padding: 2rem;
+        }
+
+        .preview-label {
+            color: rgba(255, 255, 255, 0.45);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        /* ══════════════════════════════
+           ID CARD  –  CR80: 2.125 × 3.375 in
+        ══════════════════════════════ */
+        .id-card {
+            width: 204px;
+            /* 2.125in @ 96dpi */
+            height: 324px;
+            /* 3.375in @ 96dpi */
+            border-radius: 14px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(214, 172, 17, 0.3);
+            background: linear-gradient(160deg, var(--navy-dark) 0%, #1e2844 55%, var(--navy) 100%);
+        }
+
+        /* ── Gold top bar ── */
+        .id-top-bar {
+            height: 5px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+            flex-shrink: 0;
+        }
+
+        /* ── Header (logo area) ── */
+        .id-header {
+            padding: 10px 12px 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            border-bottom: 1px solid rgba(214, 172, 17, 0.2);
+            background: linear-gradient(180deg, rgba(214, 172, 17, 0.08) 0%, transparent 100%);
+            flex-shrink: 0;
+        }
+
+        .id-logo {
+            height: 30px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .id-card-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 5.5px;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.3);
+            text-transform: uppercase;
+            margin-top: 1px;
+        }
+
+        /* ── Photo section ── */
+        .id-photo-section {
+            display: flex;
+            justify-content: center;
+            padding: 14px 0 10px;
+            flex-shrink: 0;
+        }
+
+        .id-photo-ring {
+            width: 82px;
+            height: 82px;
+            border-radius: 50%;
+            padding: 3px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
+            box-shadow: 0 6px 20px rgba(214, 172, 17, 0.4);
+        }
+
+        .id-photo-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid var(--navy-dark);
+        }
+
+        .id-photo-inner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+        }
+
+        /* ── Name + role ── */
+        .id-info {
+            text-align: center;
+            padding: 0 12px;
+            flex-shrink: 0;
+        }
+
+        .id-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12.5px;
+            font-weight: 800;
+            color: var(--white);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            line-height: 1.2;
+        }
+
+        .id-divider {
+            width: 32px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            margin: 6px auto;
+        }
+
+        .id-role {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 7.5px;
+            font-weight: 600;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 1.8px;
+        }
+
+        .id-number {
+            font-size: 7px;
+            color: rgba(255, 255, 255, 0.35);
+            margin-top: 5px;
+            letter-spacing: 1px;
+        }
+
+        /* ── QR section ── */
+        .id-qr-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            padding: 8px;
+        }
+
+        .id-qr-frame {
+            background: var(--white);
+            padding: 6px;
+            border-radius: 8px;
+            border: 2px solid var(--gold);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        #id-qr-container canvas,
+        #id-qr-container img {
+            display: block;
+            width: 60px !important;
+            height: 60px !important;
+        }
+
+        .id-qr-hint {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 5.5px;
+            letter-spacing: 1.5px;
+            color: rgba(255, 255, 255, 0.3);
+            text-transform: uppercase;
+        }
+
+        /* ── Footer ── */
+        .id-footer {
+            padding: 8px 14px 6px;
+            border-top: 1px solid rgba(214, 172, 17, 0.15);
+            background: linear-gradient(0deg, rgba(214, 172, 17, 0.06) 0%, transparent 100%);
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .id-website {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 6.5px;
+            color: var(--gold);
+            letter-spacing: 1px;
+        }
+
+        .id-bottom-bar {
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+            flex-shrink: 0;
+        }
+
+        /* ══ BACK CARD SPECIFIC ══ */
+        .cards-wrapper {
+            display: flex;
+            gap: 28px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .card-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-side-label {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 9px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.3);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .id-back {
+            background: linear-gradient(160deg, var(--navy-dark) 0%, #1e2844 55%, var(--navy) 100%);
+        }
+
+        .id-back-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 14px;
+            gap: 10px;
+        }
+
+        .id-back-logo {
+            height: 32px;
+            width: auto;
+            object-fit: contain;
+            opacity: 0.9;
+            margin-bottom: 4px;
+        }
+
+        .id-back-divider {
+            width: 60%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(214, 172, 17, 0.5), transparent);
+        }
+
+        .id-back-contacts {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+            width: 100%;
+        }
+
+        .id-back-ci {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 7.5px;
+            color: rgba(255, 255, 255, 0.7);
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .id-back-ci i {
+            color: var(--gold);
+            font-size: 8px;
+            width: 12px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .id-back-terms {
+            font-size: 5.5px;
+            color: rgba(255, 255, 255, 0.25);
+            text-align: center;
+            line-height: 1.6;
+            font-family: 'Open Sans', sans-serif;
+            padding: 0 4px;
+        }
+
+        /* ══ DOWNLOAD BUTTON ══ */
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 13px 32px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: var(--navy-dark);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 12px;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(214, 172, 17, 0.4);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 36px rgba(214, 172, 17, 0.55);
+        }
+
+        .btn-download.loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+    </style>
 </head>
 
-<body class="id-card-body">
+<body>
+    <h2 class="preview-label">Employee ID Card Preview</h2>
 
-    <div class="id-card-container">
-        <div class="id-card">
-            <div class="id-header">
-                <div class="id-logo-container">
-                    <img src="logo.png" alt="Horizon OOH" class="id-logo-img">
+    <div class="cards-wrapper">
+        <!-- FRONT -->
+        <div class="card-column">
+            <span class="card-side-label">Front</span>
+            <div id="id-front-print" class="id-card">
+                <div class="id-top-bar"></div>
+
+                <!-- Header -->
+                <div class="id-header">
+                    <img src="logo.png" alt="Horizon OOH" class="id-logo">
+                    <span class="id-card-label">Employee Identity Card</span>
                 </div>
-            </div>
 
-            <div class="id-content">
-                <div class="photo-frame">
-                    <div class="photo-placeholder">
-                        <i class="fa-solid fa-user"></i>
+                <!-- Photo -->
+                <div class="id-photo-section">
+                    <div class="id-photo-ring">
+                        <div class="id-photo-inner">
+                            <img src="employee-photo.jpg" alt="Employee Photo">
+                        </div>
                     </div>
                 </div>
 
-                <div class="employee-details">
-                    <h2 class="emp-name">Ghufran Muhammed</h2>
-                    <p class="emp-title">CEO</p>
-                    <div class="emp-divider"></div>
-                    <p class="emp-id">ID: 001</p>
+                <!-- Name & Role -->
+                <div class="id-info">
+                    <div class="id-name">Ghufran Muhammed</div>
+                    <div class="id-divider"></div>
+                    <div class="id-role">Chief Executive Officer</div>
+                    <div class="id-number">ID: HRZ-001</div>
                 </div>
 
+                <!-- WhatsApp QR -->
                 <div class="id-qr-section">
-                    <img src="qr_code.png" alt="QR Code" class="id-qr-code">
+                    <div class="id-qr-frame">
+                        <div id="id-qr-container"></div>
+                    </div>
+                    <div class="id-qr-hint">Scan to WhatsApp</div>
                 </div>
-            </div>
 
-            <div class="id-footer">
-                <div class="card-gold-bar bottom"></div>
-                <p>www.horizon-ooh.com</p>
+                <!-- Footer -->
+                <div class="id-footer">
+                    <div class="id-website">www.horizon-ooh.com</div>
+                </div>
+                <div class="id-bottom-bar"></div>
+            </div>
+        </div>
+
+        <!-- BACK -->
+        <div class="card-column">
+            <span class="card-side-label">Back</span>
+            <div id="id-back-print" class="id-card id-back">
+                <div class="id-top-bar"></div>
+
+                <div class="id-back-body">
+                    <img src="logo.png" alt="Horizon OOH" class="id-back-logo">
+
+                    <div class="id-back-divider"></div>
+
+                    <div class="id-back-contacts">
+                        
+                        <div class="id-back-ci">
+                            <i class="fa-brands fa-whatsapp"></i>
+                            <span>+92 309 1329000</span>
+                        </div>
+                        <div class="id-back-ci">
+                            <i class="fa-solid fa-envelope"></i>
+                            <span>oohhorizon@gmail.com</span>
+                        </div>
+                        <div class="id-back-ci">
+                            <i class="fa-solid fa-globe"></i>
+                            <span>www.horizon-ooh.com</span>
+                        </div>
+                    </div>
+
+                    <div class="id-back-divider"></div>
+
+                    <div class="id-back-terms">If found, please return to Horizon OOH.<br>This card is the property of
+                        Horizon OOH Media.</div>
+                </div>
+
+                <div class="id-bottom-bar"></div>
             </div>
         </div>
     </div>
 
+    <button id="download-btn" class="btn-download">
+        <i class="fa-solid fa-file-pdf"></i> Download PDF (Front + Back)
+    </button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script>
+        // WhatsApp QR code
+        new QRCode(document.getElementById('id-qr-container'), {
+            text: 'https://wa.me/923091329000',
+            width: 60,
+            height: 60,
+            colorDark: '#1c2237',
+            colorLight: '#ffffff',
+            correctLevel: QRCode.CorrectLevel.M
+        });
+
+        document.getElementById('download-btn').addEventListener('click', async function () {
+            const btn = this;
+            btn.classList.add('loading');
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Generating PDF…';
+
+            const frontEl = document.getElementById('id-front-print');
+            const backEl = document.getElementById('id-back-print');
+
+            const makeOpts = (el) => ({
+                scale: 4,
+                useCORS: true,
+                allowTaint: false,
+                scrollY: -window.scrollY,
+                scrollX: -window.scrollX,
+                logging: false,
+                backgroundColor: null,
+                width: el.offsetWidth,
+                height: el.offsetHeight
+            });
+
+            try {
+                const frontCanvas = await html2canvas(frontEl, makeOpts(frontEl));
+                const backCanvas = await html2canvas(backEl, makeOpts(backEl));
+
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF({
+                    orientation: 'portrait',
+                    unit: 'in',
+                    format: [2.125, 3.375],
+                    compress: true
+                });
+
+                // Page 1 – Front
+                pdf.addImage(frontCanvas.toDataURL('image/jpeg', 0.97),
+                    'JPEG', 0, 0, 2.125, 3.375);
+
+                // Page 2 – Back
+                pdf.addPage();
+                pdf.addImage(backCanvas.toDataURL('image/jpeg', 0.97),
+                    'JPEG', 0, 0, 2.125, 3.375);
+
+                pdf.save('Horizon_OOH_EmployeeID.pdf');
+            } catch (err) {
+                console.error('PDF error:', err);
+                alert('PDF generation failed: ' + err.message);
+            } finally {
+                btn.classList.remove('loading');
+                btn.innerHTML = '<i class="fa-solid fa-file-pdf"></i> Download PDF (Front + Back)';
+            }
+        });
+    </script>
 </body>
 
 </html>
