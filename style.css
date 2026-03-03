@@ -41,8 +41,6 @@ body {
 .header {
     background-color: var(--navy-blue);
     color: var(--white);
-    padding-top: 10px;
-    /* Further reduced from 15px */
     position: relative;
     border: none;
     outline: none;
@@ -50,27 +48,23 @@ body {
 
 .header-content {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: flex-start;
-    /* Align into top corners */
-    padding: 10px 45px 0 45px;
-    /* Further reduced from 15px */
+    padding: 30px 45px 25px 0;
+    min-height: 125px;
 }
 
 /* Logo Section */
 .logo-container {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: -15px;
-    /* Pushes logo onto the orange/gold border */
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
     z-index: 10;
 }
 
 .logo-image {
-    max-height: 130px;
-    width: auto;
+    width: 380px;
+    max-height: none;
     object-fit: contain;
 }
 
@@ -107,30 +101,26 @@ body {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    /* Right align */
-    gap: 15px;
-    font-size: 13px;
-    color: var(--gold);
-    margin-top: 15px;
+    gap: 12px;
+    font-size: 14px;
 }
 
 .contact-item {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
 }
 
 .contact-item i {
     color: var(--gold);
-    font-size: 14px;
-    width: 14px;
-    /* Fixed width for alignment */
+    font-size: 16px;
+    width: 16px;
     text-align: center;
 }
 
 .contact-item span {
-    color: #ccc;
-    font-weight: 400;
+    color: var(--white);
+    font-weight: 500;
 }
 
 .header .gold-bar {
